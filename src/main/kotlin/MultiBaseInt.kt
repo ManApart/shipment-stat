@@ -1,4 +1,5 @@
 class MultiBaseInt(private vararg val registers: BaseInt) {
+
     fun getValue(register: Int): Int{
         return registers[register]!!.value
     }
