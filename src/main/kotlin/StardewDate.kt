@@ -1,3 +1,5 @@
+import kotlin.math.abs
+
 data class StardewDate(val year: Int = 0, val season: Int = 0, val day: Int = 0) : Comparable<StardewDate> {
     init {
         require(day in 0..27) { "Day $day is out of bounds!" }
@@ -25,20 +27,38 @@ data class StardewDate(val year: Int = 0, val season: Int = 0, val day: Int = 0)
         var newSeason = season
         var newYear = year
         if (day > 27) {
-            newDay -= 28
-            newSeason += 1
+            val remainder = newDay % 28
+            val seasonAdd = newDay / 28
+            newDay = remainder
+            newSeason += seasonAdd
         }
         if (day < 0) {
-            newDay += 28
-            newSeason -= 1
+            if (abs(day) < 28) {
+                newDay += 28
+                newSeason -= 1
+            } else {
+                val remainder = newDay % 28
+                val seasonAdd = newDay / 28
+                newDay = -remainder
+                newSeason += seasonAdd
+            }
         }
         if (newSeason > 3) {
-            newSeason -= 4
-            newYear += 1
+            val remainder = newSeason % 4
+            val yearAdd = newSeason / 4
+            newSeason = remainder
+            newYear += yearAdd
         }
         if (newSeason < 0) {
-            newSeason = 3 - 1
-            newYear -= 1
+            if (abs(newSeason) < 4) {
+                newSeason += 4
+                newYear -= 1
+            } else {
+                val remainder = newSeason % 4
+                val yearAdd = newSeason / 4
+                newSeason = -remainder
+                newYear += yearAdd
+            }
         }
 
         return StardewDate(newYear, newSeason, newDay)

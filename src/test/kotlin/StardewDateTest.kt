@@ -68,7 +68,8 @@ class StardewDateTest {
         assertEquals(StardewDate(1, 0, 1), StardewDate(0,3,27).addDays(2))
 
 
-        assertEquals(StardewDate(1, 0, 26), StardewDate(0,0,0).addDays(27 * 5))
+        assertEquals(StardewDate(1, 0, 0), StardewDate(0,0,0).addDays(28 * 4))
+        assertEquals(StardewDate(0, 0, 0), StardewDate(1,0,0).addDays(-28 * 4))
     }
 
 }
