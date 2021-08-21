@@ -1,6 +1,13 @@
 package parsing
 
-data class ShipmentDay(val year: Int, val month: Int, val day: Int, val entries: List<ShipmentEntry>){
-    val totalCount by lazy { entries.sumOf { it.count } }
-    val totalRevenue by lazy { entries.sumOf { it.count * it.price } }
+import StardewDate
+
+data class ShipmentDay(val date: StardewDate, val entries: List<ShipmentEntry>) {
+    constructor(year: Int, month: Int, day: Int, entries: List<ShipmentEntry>) : this(
+        StardewDate(year, month, day),
+        entries
+    )
+
+//    val totalCount by lazy { entries.sumOf { it.count } }
+//    val totalRevenue by lazy { entries.sumOf { it.count * it.price } }
 }

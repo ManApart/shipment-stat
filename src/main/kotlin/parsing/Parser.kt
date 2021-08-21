@@ -33,5 +33,6 @@ private fun parseDay(line: String): ShipmentDay {
         ShipmentEntry(entryParts[0], entryParts[1].toLong(), entryParts[2].toLong(), entryParts[3], entryParts[4].toInt())
     }
 
-    return ShipmentDay(parts[0].toInt(), parts[1].toInt(), parts[2].toInt(), entries)
+    //Make days 0 indexed
+    return ShipmentDay(parts[0].toInt(), parts[1].toInt(), parts[2].toInt()-1, entries)
 }
