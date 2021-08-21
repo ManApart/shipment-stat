@@ -6,6 +6,10 @@ data class StardewDate(val year: Int = 0, val season: Int = 0, val day: Int = 0)
         require(season in 0..3) { "Season $season is out of bounds!" }
     }
 
+    override fun toString(): String {
+        return "$year-$season-$day"
+    }
+
     fun addDays(i: Int): StardewDate {
         return buildRollingDate(year, season, day + i)
     }

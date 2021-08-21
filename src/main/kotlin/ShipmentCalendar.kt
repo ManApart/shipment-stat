@@ -16,7 +16,19 @@ class ShipmentCalendar(private val days: List<ShipmentDay>) {
     }
 
     fun getPeriod(period: TimePeriod): ShippedRange {
-        return ShippedRange(period, mapOf())
+        val productsMap = mutableMapOf<String, ProtoProduct>()
+        days.filter { period.includes(it.date) }.forEach { day ->
+            day.entries.forEach { entry ->
+                val proto = productsMap.computeIfAbsent(entry.id) {
+                    ProtoProduct(entry.id, entry.category, entry.imageId)
+                }
+                proto.shipped[entry.price] = proto.shipped.getOrDefault(entry.price, 0) + entry.count
+            }
+        }
+        val shipped = productsMap.entries.associate { (id, shipped) ->
+            id to shipped.toProduct(period)
+        }
+        return ShippedRange(period, shipped)
     }
 
 }

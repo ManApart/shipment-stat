@@ -7,7 +7,4 @@ data class ShipmentDay(val date: StardewDate, val entries: List<ShipmentEntry>) 
         StardewDate(year, month, day),
         entries
     )
-
-//    val totalCount by lazy { entries.sumOf { it.count } }
-//    val totalRevenue by lazy { entries.sumOf { it.count * it.price } }
 }
