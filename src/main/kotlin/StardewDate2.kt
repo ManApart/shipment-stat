@@ -1,7 +1,7 @@
 import kotlin.math.abs
 
 class StardewDate2(private val registers: MultiBaseInt){
-    constructor(year: Int = 0, season: Int = 0, day: Int = 0) : this (MultiBaseInt(BaseInt(0..28, day), BaseInt(0..3, season), BaseInt(0..100, year)))
+    constructor(year: Int = 0, season: Int = 0, day: Int = 0) : this (MultiBaseInt(BaseInt(28, day), BaseInt(3, season), BaseInt(100, year)))
 
     val day get() = registers.getValue(0)
     val season get() = registers.getValue(1)
