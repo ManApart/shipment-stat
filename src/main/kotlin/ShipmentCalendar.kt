@@ -1,13 +1,13 @@
 import parsing.ShipmentDay
 
-class ShipmentCalendar(private val days: List<ShipmentDay>) {
+class ShipmentCalendar(val days: List<ShipmentDay>) {
     val timePeriod = TimePeriod(days.minOf { it.date }, days.maxOf { it.date })
 
     fun getDay(stardewDate: StardewDate): ShippedRange {
-        return getPeriod(TimePeriod(stardewDate, stardewDate.addDays(1)))
+        return getPeriod(TimePeriod(stardewDate, stardewDate))
     }
 
-    fun getMonth(stardewDate: StardewDate): ShippedRange {
+    fun getSeason(stardewDate: StardewDate): ShippedRange {
         return getPeriod(TimePeriod(stardewDate, stardewDate.addSeasons(1)))
     }
 
