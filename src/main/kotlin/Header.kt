@@ -1,3 +1,3 @@
 import java.util.*
 
-data class Header(val playerName: String, val farmName: String, val createDate: Date)
+data class Header(val farmName: String, val playerName: String, val createDate: Date)
