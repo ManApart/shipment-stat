@@ -1,0 +1,1 @@
+data class ShipmentDay(val year: Int, val month: Int, val day: Int, val entries: List<ShipmentEntry>) 
