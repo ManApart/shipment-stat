@@ -1,11 +1,11 @@
 import kotlin.math.abs
 
-data class BaseInt(private val highestNumber: Int = 9, val value: Int = 0) {
+data class BaseInt(private val base: Int = 10, val value: Int = 0) {
+    private val highestNumber = base - 1
     init {
-        require(value in 0..highestNumber) { "Value $value must be within $highestNumber" }
+        require(value in 0..highestNumber) { "Value $value must be within 0..$highestNumber" }
     }
 
-    private val extra = highestNumber + 1
 
     /**
      * Returns the amount the next higher register should be changed
@@ -14,21 +14,21 @@ data class BaseInt(private val highestNumber: Int = 9, val value: Int = 0) {
         var newAmount = value + amount
         var overflow = 0
         if (newAmount > highestNumber) {
-            val remainder = newAmount % extra
-            overflow = newAmount / extra
+            val remainder = newAmount % base
+            overflow = newAmount / base
             newAmount = remainder
         }
         if (newAmount < 0) {
             if (abs(newAmount) < highestNumber) {
-                newAmount += extra
+                newAmount += base
                 overflow -= 1
             } else {
-                val remainder = newAmount % extra
-                overflow = newAmount / extra
+                val remainder = newAmount % base
+                overflow = newAmount / base
                 newAmount = -remainder
             }
         }
-        return Pair(BaseInt(highestNumber, newAmount), overflow)
+        return Pair(BaseInt(base, newAmount), overflow)
     }
 
     operator fun minus(amount: Int): Pair<BaseInt, Int> {

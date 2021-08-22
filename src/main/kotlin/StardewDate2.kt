@@ -2,7 +2,7 @@ class StardewDate2(private val registers: MultiBaseInt) : Comparable<StardewDate
     constructor(year: Int = 0, season: Int = 0, day: Int = 0) : this(
         MultiBaseInt(
             BaseInt(28, day),
-            BaseInt(3, season),
+            BaseInt(4, season),
             BaseInt(100, year)
         )
     )
